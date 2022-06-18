@@ -1,9 +1,9 @@
-import environment from '../config/environment.js';
+import config from '../config/config.js';
 import knex from 'knex';
 
 const sql = knex({
-  client: environment.client,
-  connection: environment.connection
+  client: config.client,
+  connection: config.connection
 });
 
 export default sql;

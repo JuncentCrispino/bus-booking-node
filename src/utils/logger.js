@@ -1,10 +1,10 @@
 import { existsSync, mkdirSync } from 'fs';
 import winston from 'winston';
 import winstonDaily from 'winston-daily-rotate-file';
-import environment from '../config/environment.js';
+import config from '../config/config.js';
 
-if (!existsSync(environment.logDirectory)) {
-  mkdirSync(environment.logDirectory);
+if (!existsSync(config.logDirectory)) {
+  mkdirSync(config.logDirectory);
 }
 
 const logFormat = winston.format.printf(({ timestamp, level, message }) => `${timestamp} ${level}: ${message}`);
@@ -21,7 +21,7 @@ const logger = winston.createLogger({
     new winstonDaily({
       level: 'debug',
       datePattern: 'YYYY-MM-DD',
-      dirname: environment.logDirectory + '/debug', // log file /logs/debug/*.log in save
+      dirname: config.logDirectory + '/debug', // log file /logs/debug/*.log in save
       filename: '%DATE%.log',
       maxFiles: 30, // 30 Days saved
       json: false,
@@ -31,7 +31,7 @@ const logger = winston.createLogger({
     new winstonDaily({
       level: 'error',
       datePattern: 'YYYY-MM-DD',
-      dirname: environment.logDirectory + '/error', // log file /logs/error/*.log in save
+      dirname: config.logDirectory + '/error', // log file /logs/error/*.log in save
       filename: '%DATE%.log',
       maxFiles: 30, // 30 Days saved
       handleExceptions: true,
