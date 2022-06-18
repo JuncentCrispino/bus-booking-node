@@ -6,7 +6,7 @@ export async function up(knex) {
   const exists = await knex.schema.hasTable('drivers');
   if (!exists) {
     await knex.schema.createTable('drivers', t => {
-      t.increments('driver_id', 11)
+      t.increments('driver_id')
         .unsigned()
         .notNullable()
         .primary();
@@ -18,7 +18,7 @@ export async function up(knex) {
       t.string('driver_contact_no', 13);
       t.boolean('is_active')
         .defaultTo(true);
-      t.integer('encoded_by', 11)
+      t.integer('encoded_by')
         .unsigned()
         .index()
         .references('user_id')

@@ -2,7 +2,7 @@ import environment from '../config/environment.js';
 import knex from 'knex';
 
 const sql = knex({
-  client: 'mysql2',
+  client: environment.client,
   connection: environment.connection
 });
 

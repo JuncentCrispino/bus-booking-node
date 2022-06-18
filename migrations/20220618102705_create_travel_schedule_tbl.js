@@ -6,7 +6,7 @@ export async function up(knex) {
   const exists = await knex.schema.hasTable('travel_schedules');
   if (!exists) {
     await knex.schema.createTable('travel_schedules', t => {
-      t.increments('schedule_id', 11)
+      t.increments('schedule_id')
         .unsigned()
         .notNullable()
         .primary();
@@ -16,7 +16,7 @@ export async function up(knex) {
         .references('bus_id')
         .inTable('buses')
         .notNullable();
-      t.integer('driver_id', 11)
+      t.integer('driver_id')
         .unsigned()
         .index()
         .references('driver_id')
@@ -34,7 +34,7 @@ export async function up(knex) {
         .notNullable();
       t.float('fare_amount')
         .notNullable();
-      t.integer('encoded_by', 11)
+      t.integer('encoded_by')
         .unsigned()
         .index()
         .references('user_id')

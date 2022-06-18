@@ -6,17 +6,17 @@ export async function up(knex) {
   const exists = await knex.schema.hasTable('bookings');
   if (!exists) {
     await knex.schema.createTable('bookings', t => {
-      t.increments('booking_id', 11)
+      t.increments('booking_id')
         .unsigned()
         .notNullable()
         .primary();
-      t.integer('schedule_id', 11)
+      t.integer('schedule_id')
         .unsigned()
         .index()
         .references('schedule_id')
         .inTable('travel_schedules')
         .notNullable();
-      t.integer('customer_id', 11)
+      t.integer('customer_id')
         .unsigned()
         .index()
         .references('customer_id')
@@ -33,7 +33,7 @@ export async function up(knex) {
       t.boolean('is_booking_approved')
         .notNullable()
         .defaultTo(false);
-      t.integer('user_id', 11)
+      t.integer('encoded_by')
         .unsigned()
         .index()
         .references('user_id')

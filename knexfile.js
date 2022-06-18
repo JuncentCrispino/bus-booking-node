@@ -8,7 +8,7 @@ import environment from './src/config/environment.js';
 export default {
 
   development: {
-    client: 'mysql2',
+    client: environment.client,
     connection: environment.connection
   }
 

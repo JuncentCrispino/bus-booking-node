@@ -6,7 +6,7 @@ export async function up(knex) {
   const exists = await knex.schema.hasTable('users');
   if (!exists) {
     await knex.schema.createTable('users', t => {
-      t.increments('user_id', 11)
+      t.increments('user_id')
         .primary()
         .unsigned()
         .notNullable();

@@ -9,6 +9,7 @@ const envVarSchema = Joi.object()
     DB_USER: Joi.string().required().description('Mysql database username.'),
     DB_PASSWORD: Joi.string().required().description('Mysql database password.'),
     DB_PORT: Joi.number().default(3306),
+    DB_CLIENT: Joi.string().required().description('Database cleint ex. PostgreSql, Mysql.'),
     JWT_TOKEN_SECRET: Joi.string().required().description('Secret for creating access token.'),
     LOG_DIR: Joi.string().required().description('Directory for the logger.'),
     LOG_FORMAT: Joi.string().required().description('Format for morgan middleware').default('dev')
@@ -24,6 +25,7 @@ if (error) {
 export default {
   env: envVars.NODE_ENV,
   port: envVars.PORT,
+  client: envVars.DB_CLIENT,
   connection: {
     database: envVars.DB_NAME,
     host: envVars.DB_HOST,

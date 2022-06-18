@@ -6,9 +6,8 @@ export async function up(knex) {
   const exists = await knex.schema.hasTable('buses');
   if (!exists) {
     await knex.schema.createTable('buses', t => {
-      t.increments('bus_id', 11)
+      t.increments('bus_id')
         .unsigned()
-        .notNullable()
         .primary();
       t.string('bus_number', 11)
         .notNullable()
@@ -21,7 +20,7 @@ export async function up(knex) {
         .notNullable();
       t.boolean('is_active')
         .defaultTo(true);
-      t.integer('user_id', 11)
+      t.integer('user_id')
         .unsigned()
         .index()
         .references('user_id')
