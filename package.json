@@ -6,6 +6,9 @@
   "type": "module",
   "scripts": {
     "dev": "cross-env NODE_ENV=development nodemon src/server.js",
+    "migrate:make": "cross-env NODE_ENV=development pnpm exec knex migrate:make",
+    "migrate:up": "cross-env NODE_ENV=development pnpm exec knex migrate:up",
+    "migrate:latest": "cross-env NODE_ENV=development pnpm exec knex migrate:latest",
     "start": "pm2 start ecosystem.config.json"
   },
   "keywords": [],
@@ -20,7 +23,7 @@
     "helmet": "^5.1.0",
     "http-status": "^1.5.2",
     "joi": "^17.6.0",
-    "knex": "^2.1.0",
+    "knex": "0.95.15",
     "morgan": "^1.10.0",
     "mysql2": "^2.3.3",
     "objection": "^3.0.1",
