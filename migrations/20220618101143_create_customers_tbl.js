@@ -19,7 +19,7 @@ export async function up(knex) {
       t.string('customer_email_address', 50)
         .notNullable()
         .unique();
-      t.string('password', 50)
+      t.string('password')
         .notNullable();
       t.boolean('is_active')
         .defaultTo(true);
