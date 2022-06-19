@@ -11,6 +11,8 @@ const envVarSchema = Joi.object()
     DB_PORT: Joi.number().default(3306),
     DB_CLIENT: Joi.string().required().description('Database cleint ex. PostgreSql, Mysql.'),
     JWT_TOKEN_SECRET: Joi.string().required().description('Secret for creating access token.'),
+    ACCESS_TOKEN_EXPIRES_MINS: Joi.number().required().description('Expiration of the access token in minutes'),
+    REFRESH_TOKEN_EXPIRES_DAYS: Joi.number().required().description('Expiration of refresh token in days'),
     LOG_DIR: Joi.string().required().description('Directory for the logger.'),
     LOG_FORMAT: Joi.string().required().description('Format for morgan middleware').default('dev')
   })
@@ -34,7 +36,9 @@ export default {
     port: envVars.DB_PORT
   },
   jwt: {
-    secret: envVars.JWT_TOKEN_SECRET
+    secret: envVars.JWT_TOKEN_SECRET,
+    accessExpiresMins: envVars.ACCESS_TOKEN_EXPIRES_MINS,
+    refreshExpiresDays: envVars.REFRESH_TOKEN_EXPIRES_DAYS
   },
   logDirectory: envVars.LOG_DIR,
   logFormat: envVars.LOG_FORMAT

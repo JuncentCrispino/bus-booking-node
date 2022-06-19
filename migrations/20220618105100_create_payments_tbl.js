@@ -25,6 +25,7 @@ export async function up(knex) {
       t.string('proof_of_payment');
       t.uuid('transaction_id', 15)
         .notNullable();
+      t.timestamps(true, true);
     });
   }
 }

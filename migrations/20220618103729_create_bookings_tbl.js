@@ -39,6 +39,7 @@ export async function up(knex) {
         .references('user_id')
         .inTable('users')
         .notNullable();
+      t.timestamps(true, true);
     });
   }
 }

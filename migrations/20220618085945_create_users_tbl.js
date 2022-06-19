@@ -18,7 +18,7 @@ export async function up(knex) {
       t.string('email_address', 50)
         .notNullable()
         .unique();
-      t.string('password', 50)
+      t.string('password')
         .notNullable();
       t.string('job_title', 50)
         .notNullable();

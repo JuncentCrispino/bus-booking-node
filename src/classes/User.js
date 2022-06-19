@@ -1,5 +1,5 @@
 import sql from '../databases/busBookingDB.js';
-
+import bcrypt from 'bcrypt';
 export default class User {
 
   async findByEmail(email) {
@@ -29,6 +29,7 @@ export default class User {
   }
 
   async createUser(newUser) {
+    newUser.password = await bcrypt.hash(newUser.password, 10);
     await sql('users').insert(newUser);
   }
 
