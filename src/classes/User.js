@@ -37,12 +37,12 @@ export default class User {
 
   async createUser(newUser) {
     newUser.password = await bcrypt.hash(newUser.password, 10);
-    await sql('users').insert(newUser);
+    await this.trx('users').insert(newUser);
   }
 
   async updateUser(user_id, userUpdate) {
     userUpdate.updated_at = today(Date.now()).format('YYYY-MM-DD HH:mm:ss');
-    await sql('users').update(userUpdate).where('user_id', user_id);
+    await this.trx('users').update(userUpdate).where('user_id', user_id);
   }
 
   async updateUserStatus(user_id, status) {
