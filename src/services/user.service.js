@@ -14,3 +14,22 @@ export const createUser = async (newUser) => {
   delete createdUser.password;
   return createdUser;
 };
+
+export const updateUserDetails = async (user_id, userUpdate) => {
+  const existUser = await user.findById(user_id);
+  if (!existUser) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+  }
+  await user.updateUser(user_id, userUpdate);
+  let updateUser = await user.findById(user_id);
+  return updateUser;
+};
+
+export const userStatus = async (user_id, status) => {
+  const existUser = await user.findById(user_id);
+  if (!existUser) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+  }
+  await user.updateUserStatus(user_id, status);
+  return ({ message: 'successfully update user status.' });
+};

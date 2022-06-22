@@ -1,6 +1,13 @@
 import sql from '../databases/busBookingDB.js';
 import bcrypt from 'bcrypt';
+import today from '../utils/manilaTimeZone.js';
 export default class User {
+
+  trx;
+
+  constructor(trx) {
+    this.trx = trx;
+  }
 
   async findByEmail(email) {
     const user = await sql('users').where('email_address', email).then(([user]) => user);
@@ -33,8 +40,17 @@ export default class User {
     await sql('users').insert(newUser);
   }
 
-  async updateUser(id, userUpdate) {
-    await sql('users').update(userUpdate).where('user_id', id);
+  async updateUser(user_id, userUpdate) {
+    userUpdate.updated_at = today(Date.now()).format('YYYY-MM-DD HH:mm:ss');
+    await sql('users').update(userUpdate).where('user_id', user_id);
+  }
+
+  async updateUserStatus(user_id, status) {
+    let is_active = 1;
+    if (status === 1) {
+      is_active = 0;
+    }
+    await sql('users').update({ is_active }).where({ user_id });
   }
 
 }
